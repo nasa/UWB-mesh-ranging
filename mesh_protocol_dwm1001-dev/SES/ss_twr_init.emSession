@@ -1,0 +1,109 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="" line="629" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../src/SlotMap.c" useHWbreakpoint="false"/>
+ </Breakpoints>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
+ </FrameBufferWindow>
+ <Memory1>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ss_twr_init" radix="16" sizeText="14" addressText="&amp;rx_buffer"/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="MeshProtocolFull_DWM1001-DEV" radix="16" sizeText="14" addressText="&amp;rx_buffer"/>
+ </Memory1>
+ <Memory2>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ss_twr_init" radix="16" sizeText="" addressText=""/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="MeshProtocolFull_DWM1001-DEV" radix="16" sizeText="" addressText=""/>
+ </Memory2>
+ <Memory3>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ss_twr_init" radix="16" sizeText="" addressText=""/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="MeshProtocolFull_DWM1001-DEV" radix="16" sizeText="" addressText=""/>
+ </Memory3>
+ <Memory4>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="ss_twr_init" radix="16" sizeText="" addressText=""/>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="MeshProtocolFull_DWM1001-DEV" radix="16" sizeText="" addressText=""/>
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Application"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Board Definition"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Board Support"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Config"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Decadriver"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Freertos"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Internal Files"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;nRF_Drivers"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;nRF_Libraries"/>
+  <ProjectSessionItem path="MeshProtocolFull_DWM1001-DEV;MeshProtocolFull_DWM1001-DEV;Protocol"/>
+ </Project>
+ <Register1>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ss_twr_init" decimalNodes="" octalNodes="" unsignedNodes=""/>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="MeshProtocolFull_DWM1001-DEV" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register1>
+ <Register2>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ss_twr_init" decimalNodes="" octalNodes="" unsignedNodes=""/>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="MeshProtocolFull_DWM1001-DEV" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register2>
+ <Register3>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ss_twr_init" decimalNodes="" octalNodes="" unsignedNodes=""/>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="MeshProtocolFull_DWM1001-DEV" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register3>
+ <Register4>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="ss_twr_init" decimalNodes="" octalNodes="" unsignedNodes=""/>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="MeshProtocolFull_DWM1001-DEV" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register4>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never">
+   <Watchpoint expression="rx_buffer" name="rx_buffer" radix="-1" linenumber="420" filename="../src/main.c"/>
+   <Watchpoint expression="counter" name="counter" radix="-1" linenumber="522" filename="../src/main.c"/>
+  </Watches>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="20" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../src/main.c" selected="1" top="18" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="362" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/MessageHandler.c" useBinaryEdit="0" left="0" path="../src/DWM1001DEVDriver.c" selected="0" top="343" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="20" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/StateMachine.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="19" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/main.c" useBinaryEdit="0" left="0" path="../src/StateMachine.c" selected="0" top="16" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="283" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/StateActions.c" useBinaryEdit="0" left="0" path="../src/MessageHandler.c" selected="0" top="264" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="88" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/GuardConditions.c" useBinaryEdit="0" left="0" path="../src/Neighborhood.c" selected="0" top="75" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="17" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/MessageHandler.c" useBinaryEdit="0" left="0" path="../src/SlotMap.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="34" y="51" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/Message.h" selected="0" top="39" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/Node.h" selected="0" top="21" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="6" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../src/RangingManager.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="15" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/IndividualNodeConfig.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="36" y="48" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../src/Config.c" selected="0" top="33" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="20" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/TimeKeeping.c" useBinaryEdit="0" left="0" path="../include/Config.h" selected="0" top="14" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="7" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/StateMachine.c" useBinaryEdit="0" left="0" path="../src/StateActions.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="165" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/StateMachine.c" useBinaryEdit="0" left="0" path="../src/GuardConditions.c" selected="0" top="177" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="5" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/Constants.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/Driver.h" selected="0" top="87" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="23" y="13" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/DWM1001_Constants.h" selected="0" top="72" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="30" y="97" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/SlotMap.h" selected="0" top="81" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="80" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/StateActions.c" useBinaryEdit="0" left="0" path="../src/Scheduler.c" selected="0" top="68" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="15" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/SlotMap.c" useBinaryEdit="0" left="0" path="../src/RandomNumbers.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="15" y="110" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/GuardConditions.c" useBinaryEdit="0" left="0" path="../src/TimeKeeping.c" selected="0" top="84" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="472" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/main.c" useBinaryEdit="0" left="0" path="../deca_driver/deca_regs.h" selected="0" top="454" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="5" y="2666" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/DWM1001DEVDriver.c" useBinaryEdit="0" left="0" path="../deca_driver/deca_device.c" selected="0" top="2652" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="106" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../deca_driver/port/port_platform.c" selected="0" top="92" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="4" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../src/Util.c" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="22" y="13" useTextEdit="1" openedFrom="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src/StateMachine.c" useBinaryEdit="0" left="0" path="../include/GuardConditions.h" selected="0" top="11" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="48" y="31" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../include/MessageHandler.h" selected="0" top="27" codecName="Default"/>
+ </Files>
+ <ARMCrossStudioWindow activeProject="MeshProtocolFull_DWM1001-DEV" fileDialogDefaultFilter="*.c;*.cpp;*.cxx;*.cc;*.h;*.hpp;*.hxx" autoConnectTarget="J-Link" buildConfiguration="nrf52832_xxaa" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/home/robin/git/mesh_protocol/C/mesh_protocol_dwm1001-dev/src" debugSearchPath="" autoConnectCapabilities="3711"/>
+</session>

@@ -1,0 +1,164 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="MeshProtocolFull_DWM1001-DEV" target="8" version="2">
+  <project Name="MeshProtocolFull_DWM1001-DEV">
+    <configuration
+      Name="Common"
+      arm_architecture="v7EM"
+      arm_core_type="Cortex-M4"
+      arm_endian="Little"
+      arm_fp_abi="Hard"
+      arm_fpu_type="FPv4-SP-D16"
+      arm_simulator_memory_simulation_parameter="RX 00000000,00080000,FFFFFFFF;RWX 20000000,00010000,CDCDCDCD"
+      arm_target_device_name="nRF52832_xxAA"
+      arm_target_interface_type="SWD"
+      c_user_include_directories="../nRF5_SDK_14.2.0/components/toolchain/cmsis/include;../nRF5_SDK_14.2.0/components/libraries/timer/"
+      debug_start_from_entry_point_symbol="No"
+      debug_target_connection="J-Link"
+      linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml"
+      linker_section_placements_segments="FLASH RX 0x00000000 0x00080000;SRAM RWX 0x20000000 0x00010000"
+      project_directory=""
+      project_type="Executable" />
+    <folder Name="Internal Files">
+      <file file_name="RTE/thumb_crt0.s" />
+      <file file_name="../nRF5_SDK_14.2.0/components/toolchain/system_nrf52.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/toolchain/ses/ses_nrf52_startup.s" />
+    </folder>
+    <configuration
+      Name="nrf52832_xxaa"
+      c_only_additional_options=""
+      c_preprocessor_definitions="BOARD_DW1001_DEV;BSP_SIMPLE;;CONFIG_GPIO_AS_PINRESET;FLOAT_ABI_HARD;NRF52;NRF52832_XXAA;NRF52_PAN_74;SWI_DISABLE0"
+      c_user_include_directories="$(PackagesDir)/nRF/CMSIS/Device/Include;$(PackagesDir)/CMSIS_5/CMSIS/Core/Include;../nRF5_SDK_14.2.0/components/device;../UART;../config;../nRF5_SDK_14.2.0/components;../nRF5_SDK_14.2.0/components/boards;../nRF5_SDK_14.2.0/components/drivers_nrf/clock;../nRF5_SDK_14.2.0/components/drivers_nrf/common;../nRF5_SDK_14.2.0/components/drivers_nrf/delay;../nRF5_SDK_14.2.0/components/drivers_nrf/gpiote;../nRF5_SDK_14.2.0/components/drivers_nrf/hal;../nRF5_SDK_14.2.0/components/drivers_nrf/nrf_soc_nosd;../nRF5_SDK_14.2.0/components/drivers_nrf/spi_master;../nRF5_SDK_14.2.0/components/drivers_nrf/uart;../nRF5_SDK_14.2.0/components/libraries/atomic;../nRF5_SDK_14.2.0/components/libraries/balloc;../nRF5_SDK_14.2.0/components/libraries/bsp;../nRF5_SDK_14.2.0/components/libraries/button;../nRF5_SDK_14.2.0/components/libraries/fifo;../nRF5_SDK_14.2.0/components/libraries/experimental_log;../nRF5_SDK_14.2.0/components/libraries/experimental_log/src;../nRF5_SDK_14.2.0/components/libraries/experimental_memobj;../nRF5_SDK_14.2.0/components/libraries/experimental_section_vars;../nRF5_SDK_14.2.0/components/libraries/scheduler;../nRF5_SDK_14.2.0/components/libraries/strerror;../nRF5_SDK_14.2.0/components/libraries/timer;../nRF5_SDK_14.2.0/components/libraries/util;../nRF5_SDK_14.2.0/components/libraries/uart;../nRF5_SDK_14.2.0/components/toolchain;../deca_driver;../deca_driver/port;../nRF5_SDK_14.2.0/external/fprintf;../nRF5_SDK_14.2.0/external/segger_rtt;../nRF5_SDK_14.2.0/external/freertos/;../nRF5_SDK_14.2.0/external/freertos/source;../nRF5_SDK_14.2.0/external/freertos/config;../nRF5_SDK_14.2.0/external/freertos/source/include;../nRF5_SDK_14.2.0/external/freertos/portable/ARM/nrf52;../nRF5_SDK_14.2.0/external/freertos/portable/CMSIS/nrf52;../nRF5_SDK_14.2.0/external/freertos/source/portable;../boards;.."
+      linker_additional_options=""
+      linker_section_placement_file="$(ProjectDir)/RTE/flash_placement.xml" />
+    <configuration
+      Name="External Keil"
+      c_additional_options="--reduce_paths" />
+    <folder Name="Application">
+      <file file_name="../config/sdk_config.h" />
+    </folder>
+    <folder Name="Board Definition">
+      <file file_name="../nRF5_SDK_14.2.0/components/boards/boards.c" />
+    </folder>
+    <folder Name="Board Support">
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/bsp/bsp.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/bsp/bsp_nfc.c" />
+    </folder>
+    <folder Name="nRF_Drivers">
+      <file file_name="../nRF5_SDK_14.2.0/components/drivers_nrf/clock/nrf_drv_clock.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/drivers_nrf/common/nrf_drv_common.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/drivers_nrf/gpiote/nrf_drv_gpiote.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/drivers_nrf/spi_master/nrf_drv_spi.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/drivers_nrf/uart/nrf_drv_uart.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/drivers_nrf/timer/nrf_drv_timer.c" />
+    </folder>
+    <folder Name="nRF_Libraries">
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/button/app_button.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/util/app_error.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/util/app_error_weak.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/util/app_util_platform.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/util/nrf_assert.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/fifo/app_fifo.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/scheduler/app_scheduler.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/uart/app_uart_fifo.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/balloc/nrf_balloc.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/fprintf/nrf_fprintf.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/fprintf/nrf_fprintf_format.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/experimental_memobj/nrf_memobj.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/strerror/nrf_strerror.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/uart/retarget.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/timer/app_timer.c" />
+    </folder>
+    <folder Name="nRF_Log">
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/experimental_log/src/nrf_log_backend_rtt.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/experimental_log/src/nrf_log_backend_serial.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/experimental_log/src/nrf_log_backend_uart.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/experimental_log/src/nrf_log_default_backends.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/experimental_log/src/nrf_log_frontend.c" />
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/experimental_log/src/nrf_log_str_formatter.c" />
+    </folder>
+    <folder Name="nRF_Segger_RTT">
+      <file file_name="../nRF5_SDK_14.2.0/external/segger_rtt/SEGGER_RTT.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/segger_rtt/SEGGER_RTT_printf.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/segger_rtt/SEGGER_RTT_Syscalls_KEIL.c" />
+    </folder>
+    <folder Name="Decadriver">
+      <file file_name="../deca_driver/deca_device.c" />
+      <file file_name="../deca_driver/deca_params_init.c" />
+      <file file_name="../deca_driver/port/port_platform.c">
+        <configuration Name="nrf52832_xxaa" build_exclude_from_build="No" />
+      </file>
+    </folder>
+    <folder Name="Freertos">
+      <file file_name="../nRF5_SDK_14.2.0/components/libraries/timer/app_timer_freertos.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/source/croutine.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/source/event_groups.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/source/list.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/source/queue.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/source/tasks.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/source/timers.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/source/portable/MemMang/heap_1.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/portable/GCC/nrf52/port.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/portable/CMSIS/nrf52/port_cmsis.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/portable/CMSIS/nrf52/port_cmsis_systick.c" />
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/portable/CMSIS/nrf52/portmacro_cmsis.h" />
+      <configuration Name="nrf52832_xxaa" build_exclude_from_build="Yes" />
+    </folder>
+    <folder Name="Config">
+      <file file_name="../nRF5_SDK_14.2.0/external/freertos/config/FreeRTOSConfig.h" />
+    </folder>
+    <folder Name="Uart">
+      <file file_name="../UART/UART.c" />
+    </folder>
+    <folder Name="::CMSIS" />
+    <folder Name="::Device" />
+    <folder Name="Protocol">
+      <file file_name="../src/Config.c" />
+      <file file_name="../src/GuardConditions.c" />
+      <file file_name="../src/LCG.c" />
+      <file file_name="../src/main.c" />
+      <file file_name="../src/Message.c" />
+      <file file_name="../src/MessageHandler.c" />
+      <file file_name="../src/Neighborhood.c" />
+      <file file_name="../src/NetworkManager.c" />
+      <file file_name="../src/Node.c" />
+      <file file_name="../src/RandomNumbers.c" />
+      <file file_name="../src/RangingManager.c" />
+      <file file_name="../src/Scheduler.c" />
+      <file file_name="../src/SlotMap.c" />
+      <file file_name="../src/StateActions.c" />
+      <file file_name="../src/StateMachine.c" />
+      <file file_name="../src/TimeKeeping.c" />
+      <file file_name="../src/Util.c" />
+      <file file_name="../src/DWM1001DEVDriver.c" />
+      <file file_name="../include/Config.h" />
+      <file file_name="../include/Constants.h" />
+      <file file_name="../include/Driver.h" />
+      <file file_name="../include/GuardConditions.h" />
+      <file file_name="../include/LCG.h" />
+      <file file_name="../include/Message.h" />
+      <file file_name="../include/MessageHandler.h" />
+      <file file_name="../include/Neighborhood.h" />
+      <file file_name="../include/Node.h" />
+      <file file_name="../include/RandomNumbers.h" />
+      <file file_name="../include/RangingManager.h" />
+      <file file_name="../include/Scheduler.h" />
+      <file file_name="../include/SlotMap.h" />
+      <file file_name="../include/StateActions.h" />
+      <file file_name="../include/StateMachine.h" />
+      <file file_name="../include/TimeKeeping.h" />
+      <file file_name="../include/Util.h" />
+      <file file_name="../include/NetworkManager.h" />
+      <file file_name="../include/DWM1001_Constants.h" />
+      <file file_name="../include/IndividualNodeConfig.h" />
+      <file file_name="../include/ProtocolClock.h" />
+      <file file_name="../src/ProtocolClock.c" />
+    </folder>
+  </project>
+  <configuration Name="Internal" hidden="Yes" />
+  <configuration
+    Name="nrf52832_xxaa"
+    inherited_configurations="Internal"
+    linker_additional_options=""
+    linker_printf_fp_enabled="Float"
+    linker_section_placement_file="$(ProjectDir)/RTE/flash_placement.xml" />
+</solution>

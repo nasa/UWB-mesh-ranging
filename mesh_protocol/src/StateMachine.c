@@ -114,7 +114,7 @@ void StateMachine_Run(Node node, Events event, Message msg) {
               break;
             case POLL: ;
               if (msg->recipientId == node->id) {
-                // when receiving a poll, transition to WAIT state (from there it will transition to responding)
+                // when receiving a poll, transition to RESPONSE state
                 node->stateMachine->state = RANGING_RESPONSE;
                 // handle the poll by executing the corresponding action
                 StateActions_ListeningConnectedIncomingMsgAction(node, msg);

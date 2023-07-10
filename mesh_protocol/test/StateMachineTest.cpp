@@ -6,6 +6,7 @@ extern "C" {
 #include "../include/ProtocolClock.h"
 #include "../include/Message.h"
 #include "../include/Scheduler.h"
+#include "../include/TimeKeeping.h"
 #include "../include/GuardConditions.h"
 #include "../include/Driver.h"
 #include "../test/fff.h"
@@ -307,6 +308,9 @@ class StateMachineTestListeningConnected : public ::testing::Test {
     sm = StateMachine_Create();
     scheduler = Scheduler_Create();
     msg = Message_Create(PING);
+    timekeeping = TimeKeeping_Create();
+    config = Config_Create();
+    neighborhood = Neighborhood_Create();
 
     Node_SetStateMachine(node, sm);
 
@@ -320,6 +324,9 @@ class StateMachineTestListeningConnected : public ::testing::Test {
   StateMachine sm;
   Scheduler scheduler;
   Message msg;
+  TimeKeeping timekeeping;
+  Config config;
+  Neighborhood neighborhood;
 };
 
 TEST_F(StateMachineTestListeningConnected, stateActionCalledIncomingPing) {
@@ -398,7 +405,7 @@ TEST_F(StateMachineTestListeningConnected, cancelScheduleIfSendingNotAllowed) {
 
   StateMachine_Run(node, TIME_TIC, NULL);
 
-  EXPECT_EQ(0, Scheduler_GetTimeOfNextSchedule(node));
+  EXPECT_EQ(-1, Scheduler_GetTimeOfNextSchedule(node));
   EXPECT_EQ(StateActions_ListeningConnectedTimeTicAction_fake.call_count, 1);
 }
 
@@ -412,6 +419,7 @@ TEST_F(StateMachineTestListeningConnected, backToUnconnected) {
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
+  Node_SetTimeKeeping(node, timekeeping);
 
   Scheduler_SchedulePingAtTime(node, 5);
 
@@ -433,8 +441,13 @@ TEST_F(StateMachineTestListeningConnected, rangingDue) {
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
+  Node_SetConfig(node, config);
+  Node_SetNeighborhood(node, neighborhood);
 
   Scheduler_SchedulePingAtTime(node, 5);
+
+  // add neighbor
+  Neighborhood_AddOrUpdateOneHopNeighbor(node, 3);
 
   StateMachine_Run(node, TIME_TIC, NULL);
 
@@ -457,10 +470,35 @@ TEST_F(StateMachineTestListeningConnected, incomingPoll) {
   StateMachine_Run(node, TIME_TIC, NULL);
 
   Message msg = Message_Create(POLL);
+  msg->recipientId = 1;
+  node->id = 1;
+  
   StateMachine_Run(node, INCOMING_MSG, msg);
 
-  EXPECT_EQ(RANGING_WAIT, StateMachine_GetState(node));
+  EXPECT_EQ(RANGING_RESPONSE, StateMachine_GetState(node));
   EXPECT_EQ(StateActions_ListeningConnectedIncomingMsgAction_fake.call_count, 1);
+}
+
+TEST_F(StateMachineTestListeningConnected, incomingPollOtherId) {
+  // ping not scheduled to current time
+  int64_t testTime = 1;
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
+
+  Node_SetClock(node, clock);
+  Node_SetScheduler(node, scheduler);
+
+  Scheduler_SchedulePingAtTime(node, 5);
+
+  StateMachine_Run(node, TIME_TIC, NULL);
+
+  Message msg = Message_Create(POLL);
+  msg->recipientId = 1;
+  node->id = 2;
+  
+  StateMachine_Run(node, INCOMING_MSG, msg);
+
+  EXPECT_EQ(LISTENING_CONNECTED, StateMachine_GetState(node));
+  EXPECT_EQ(StateActions_ListeningConnectedIncomingMsgAction_fake.call_count, 0);
 }
 
 //TEST_F(StateMachineTestListeningConnected, respondsAfterPoll) {

@@ -52,7 +52,7 @@ extern "C" {
 }
 
 DEFINE_FFF_GLOBALS;
-FAKE_VALUE_FUNC(uint64_t, RandomNumbers_GetRandomIntBetween, Node, uint64_t, uint64_t);
+FAKE_VALUE_FUNC(int64_t, RandomNumbers_GetRandomIntBetween, Node, int64_t, int64_t);
 FAKE_VALUE_FUNC(int16_t, RandomNumbers_GetRandomElementFrom, Node, int16_t*, int16_t);
 
 
@@ -72,7 +72,7 @@ class MessageHandlerTestGeneral : public ::testing::Test {
 
     int64_t *time = (int64_t *)malloc(1);
     *time = 5;
-    clock = HALClock_Create(time);
+    clock = ProtocolClock_Create(time);
     config = Config_Create();
 
     Node_SetMessageHandler(node, messageHandler);
@@ -92,7 +92,7 @@ class MessageHandlerTestGeneral : public ::testing::Test {
   Scheduler scheduler;
   NetworkManager networkManager;
   TimeKeeping timeKeeping;
-  HALClock clock;
+  ProtocolClock clock;
   SlotMap slotMap;
   Neighborhood neighborhood;
   Config config;
@@ -102,7 +102,7 @@ class MessageHandlerTestGeneral : public ::testing::Test {
 TEST_F(MessageHandlerTestGeneral, handlePingUnconnected) {
   Message msg = Message_Create(PING);
   msg->senderId = 2;
-  msg->timestamp = HALClock_GetLocalTime(node->clock);
+  msg->timestamp = ProtocolClock_GetLocalTime(node->clock);
 
   msg->oneHopSlotStatus[0] = FREE;
   msg->oneHopSlotStatus[1] = OCCUPIED;
@@ -127,10 +127,10 @@ TEST_F(MessageHandlerTestGeneral, handlePingUnconnected) {
   EXPECT_EQ(CONNECTED, NetworkManager_GetNetworkStatus(node));
   EXPECT_EQ(msg->networkId, NetworkManager_GetNetworkId(node));
   
-  SlotOccupancy twoHopStatusbuffer[4];
+  int twoHopStatusbuffer[4];
   SlotMap_GetTwoHopSlotMapStatus(node, &twoHopStatusbuffer[0], 4);
 
-  SlotOccupancy threeHopStatusbuffer[4];
+  int threeHopStatusbuffer[4];
   SlotMap_GetThreeHopSlotMapStatus(node, &threeHopStatusbuffer[0], 4);
 
   EXPECT_EQ(0, twoHopStatusbuffer[0]);
@@ -149,7 +149,7 @@ TEST_F(MessageHandlerTestGeneral, handlePingUnconnected) {
 TEST_F(MessageHandlerTestGeneral, handlePingConnectedForeignNotPrecedingPendingSlotCollides) {
   // should not switch networks even if pending slot collides, because there is another node in the network
   int64_t time = 1;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   node->id = 1;
@@ -184,7 +184,7 @@ TEST_F(MessageHandlerTestGeneral, handlePingConnectedForeignNotPrecedingPendingS
 TEST_F(MessageHandlerTestGeneral, handlePingConnectedForeignNotPrecedingPendingSlotCollidesNoOtherNode) {
   // should switch networks because pending slot collides and there is no other node
   int64_t time = 1;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   node->id = 1;

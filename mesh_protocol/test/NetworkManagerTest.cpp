@@ -11,7 +11,7 @@ extern "C" {
 }
 
 DEFINE_FFF_GLOBALS;
-FAKE_VALUE_FUNC(uint64_t, RandomNumbers_GetRandomIntBetween, Node, uint64_t, uint64_t); // not used (remove when implementation is done)
+FAKE_VALUE_FUNC(int64_t, RandomNumbers_GetRandomIntBetween, Node, int64_t, int64_t); // not used (remove when implementation is done)
 FAKE_VALUE_FUNC(int16_t, RandomNumbers_GetRandomElementFrom, Node, int16_t*, int16_t);
 
 //FAKE_VALUE_FUNC(bool, SlotMap_SlotReservationGoalMet, Node); // not used (remove when implementation is done)
@@ -26,7 +26,7 @@ class NetworkManagerTestGeneral : public ::testing::Test {
 
     int64_t *time = (int64_t *)malloc(1);
     *time = 5;
-    clock = HALClock_Create(time);
+    clock = ProtocolClock_Create(time);
     networkManager = NetworkManager_Create();
     conf = Config_Create();
     timeKeeping = TimeKeeping_Create();
@@ -40,7 +40,7 @@ class NetworkManagerTestGeneral : public ::testing::Test {
    //void TearDown() override {}
 
   Node node;
-  HALClock clock;
+  ProtocolClock clock;
   NetworkManager networkManager;
   Config conf;
   TimeKeeping timeKeeping;
@@ -65,7 +65,7 @@ TEST_F(NetworkManagerTestGeneral, calculateNetworkAgeForSelfCreatedNetwork) {
   NetworkManager_CreateNetwork(node);
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   EXPECT_EQ(0, NetworkManager_CalculateNetworkAge(node));
@@ -83,14 +83,14 @@ TEST_F(NetworkManagerTestGeneral, pingFromForeignNetworkDifferentId) {
   NetworkManager_CreateNetwork(node);
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   //TimeKeeping_RecordPreamble(node);
   Message msg = Message_Create(PING);
   msg->networkId = 2;
   msg->networkAge = 0;
-  msg->timestamp = HALClock_GetLocalTime(node->clock);
+  msg->timestamp = ProtocolClock_GetLocalTime(node->clock);
 
   EXPECT_EQ(true, NetworkManager_IsPingFromForeignNetwork(node, msg));
 }
@@ -100,14 +100,14 @@ TEST_F(NetworkManagerTestGeneral, pingFromForeignNetworkDifferentAge) {
   NetworkManager_CreateNetwork(node);
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   //TimeKeeping_RecordPreamble(node);
   Message msg = Message_Create(PING);
   msg->networkId = 1;
   msg->networkAge = 5;
-  msg->timestamp = HALClock_GetLocalTime(node->clock);
+  msg->timestamp = ProtocolClock_GetLocalTime(node->clock);
 
   EXPECT_EQ(true, NetworkManager_IsPingFromForeignNetwork(node, msg));
 }
@@ -117,7 +117,7 @@ TEST_F(NetworkManagerTestGeneral, pingFromSameNetwork) {
   NetworkManager_CreateNetwork(node);
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   time = 10;
@@ -125,7 +125,7 @@ TEST_F(NetworkManagerTestGeneral, pingFromSameNetwork) {
   Message msg = Message_Create(PING);
   msg->networkId = 1;
   msg->networkAge = 5;
-  msg->timestamp = HALClock_GetLocalTime(node->clock);
+  msg->timestamp = ProtocolClock_GetLocalTime(node->clock);
 
   EXPECT_EQ(false, NetworkManager_IsPingFromForeignNetwork(node, msg));
 }
@@ -135,14 +135,14 @@ TEST_F(NetworkManagerTestGeneral, foreignNetworkPrecedes) {
   NetworkManager_CreateNetwork(node);
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   //TimeKeeping_RecordPreamble(node);
   Message msg = Message_Create(PING);
   msg->networkId = 2;
   msg->networkAge = 5;
-  msg->timestamp = HALClock_GetLocalTime(node->clock);
+  msg->timestamp = ProtocolClock_GetLocalTime(node->clock);
 
   EXPECT_EQ(true, NetworkManager_IsForeignNetworkPreceding(node, msg));
 }
@@ -152,7 +152,7 @@ TEST_F(NetworkManagerTestGeneral, foreignNetworkDoesNotPrecede) {
   NetworkManager_CreateNetwork(node);
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   time = 10;
@@ -160,7 +160,7 @@ TEST_F(NetworkManagerTestGeneral, foreignNetworkDoesNotPrecede) {
   Message msg = Message_Create(PING);
   msg->networkId = 2;
   msg->networkAge = 5;
-  msg->timestamp = HALClock_GetLocalTime(node->clock);
+  msg->timestamp = ProtocolClock_GetLocalTime(node->clock);
 
   EXPECT_EQ(false, NetworkManager_IsForeignNetworkPreceding(node, msg));
 }

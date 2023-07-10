@@ -3,7 +3,7 @@
 extern "C" {
 #include "../include/Node.h"
 #include "../include/StateMachine.h"
-#include "../include/HALClock.h"
+#include "../include/ProtocolClock.h"
 #include "../include/Message.h"
 #include "../include/Scheduler.h"
 #include "../include/GuardConditions.h"
@@ -38,7 +38,7 @@ FAKE_VALUE_FUNC(bool, GuardConditions_IdleToListeningConAllowed, Node);
 FAKE_VALUE_FUNC(bool, GuardConditions_IdleToListeningConAllowedIncomingMsg, Node, Message);
 FAKE_VALUE_FUNC(bool, GuardConditions_IdleingAllowed, Node);
 
-FAKE_VALUE_FUNC(uint64_t, RandomNumbers_GetRandomIntBetween, Node, uint64_t, uint64_t);
+FAKE_VALUE_FUNC(int64_t, RandomNumbers_GetRandomIntBetween, Node, int64_t, int64_t);
 FAKE_VALUE_FUNC(bool, SlotMap_SlotReservationGoalMet, Node);
 FAKE_VALUE_FUNC(int8_t, SlotMap_GetReservableSlot, Node);
 FAKE_VALUE_FUNC(int8_t, SlotMap_CalculateNextOwnOrPendingSlotNum, Node, int8_t);
@@ -51,13 +51,13 @@ FAKE_VALUE_FUNC(bool, SlotMap_IsOwnSlot, Node, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_IsPendingSlot, Node, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_ReleasePendingSlot, Node, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_ReleaseOwnSlot, Node, int8_t);
-FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapStatus, Node, SlotOccupancy*, int8_t);
+FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapStatus, Node, int*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapIds, Node, int8_t*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapLastUpdated, Node, int64_t*, int8_t);
-FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapStatus, Node, SlotOccupancy*, int8_t);
+FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapStatus, Node, int*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapIds, Node, int8_t*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapLastUpdated, Node, int64_t*, int8_t);
-FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapStatus, Node, SlotOccupancy*, int8_t);
+FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapStatus, Node, int*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapIds, Node, int8_t*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapLastUpdated, Node, int64_t*, int8_t);
 FAKE_VALUE_FUNC(int8_t, SlotMap_GetCollisionTimes, Node, int64_t*, int8_t);
@@ -122,7 +122,7 @@ TEST_F(StateMachineTestListeningUnconnected, listeningConnectedAfterPingReceived
   // run listening unconnected
 
   int64_t testTime = 1234;
-  HALClock clock = HALClock(&testTime);
+  ProtocolClock clock = ProtocolClock(&testTime);
 
   Node_SetClock(node, clock);
 
@@ -143,7 +143,7 @@ TEST_F(StateMachineTestListeningUnconnected, noStateChangeTimeTicPingNotSchedule
   // run listening unconnected
 
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -159,7 +159,7 @@ TEST_F(StateMachineTestListeningUnconnected, listeningUnconnectedStateActionCall
   //GuardConditions_ListeningUncToSendingUncAllowed_fake.return_val = true;
 
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -175,7 +175,7 @@ TEST_F(StateMachineTestListeningUnconnected, listeningUnconnectedStateActionCall
   GuardConditions_ListeningUncToSendingUncAllowed_fake.return_val = false;
 
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -193,7 +193,7 @@ TEST_F(StateMachineTestListeningUnconnected, stateChangeTimeTicPingScheduled) {
   GuardConditions_ListeningUncToSendingUncAllowed_fake.return_val = true;
 
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -229,7 +229,7 @@ class StateMachineTestSendingUnconnected : public ::testing::Test {
     // running time tic
     GuardConditions_ListeningUncToSendingUncAllowed_fake.return_val = true;
     int64_t testTime = 1;
-    HALClock clock = HALClock_Create(&testTime);
+    ProtocolClock clock = ProtocolClock_Create(&testTime);
 
     Node_SetClock(node, clock);
     Node_SetScheduler(node, scheduler);
@@ -332,7 +332,7 @@ TEST_F(StateMachineTestListeningConnected, stateActionCalledIncomingPing) {
 TEST_F(StateMachineTestListeningConnected, timeTicNoPingScheduledNow) {
   // ping not scheduled to current time
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -351,7 +351,7 @@ TEST_F(StateMachineTestListeningConnected, timeTicSendingNotAllowed) {
   GuardConditions_ListeningConToSendingConAllowed_fake.return_val = false;
 
   int64_t testTime = 5;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -370,7 +370,7 @@ TEST_F(StateMachineTestListeningConnected, timeTicSendingAllowedAndScheduled) {
   GuardConditions_ListeningConToSendingConAllowed_fake.return_val = true;
 
   int64_t testTime = 5;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -389,7 +389,7 @@ TEST_F(StateMachineTestListeningConnected, cancelScheduleIfSendingNotAllowed) {
   GuardConditions_ListeningConToSendingConAllowed_fake.return_val = false;
 
   int64_t testTime = 5;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -408,7 +408,7 @@ TEST_F(StateMachineTestListeningConnected, backToUnconnected) {
   GuardConditions_ListeningConToListeningUncAllowed_fake.return_val = true;
 
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -429,7 +429,7 @@ TEST_F(StateMachineTestListeningConnected, rangingDue) {
   GuardConditions_RangingPollAllowed_fake.return_val = true;
 
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -447,7 +447,7 @@ TEST_F(StateMachineTestListeningConnected, rangingDue) {
 TEST_F(StateMachineTestListeningConnected, incomingPoll) {
   // ping not scheduled to current time
   int64_t testTime = 1;
-  HALClock clock = HALClock_Create(&testTime);
+  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
   Node_SetClock(node, clock);
   Node_SetScheduler(node, scheduler);
@@ -466,7 +466,7 @@ TEST_F(StateMachineTestListeningConnected, incomingPoll) {
 //TEST_F(StateMachineTestListeningConnected, respondsAfterPoll) {
 //  // ping not scheduled to current time
 //  int64_t testTime = 1;
-//  HALClock clock = HALClock_Create(&testTime);
+//  ProtocolClock clock = ProtocolClock_Create(&testTime);
 
 //  Node_SetClock(node, clock);
 //  Node_SetScheduler(node, scheduler);
@@ -511,7 +511,7 @@ class StateMachineTestSendingConnected : public ::testing::Test {
     // set to sending connected by scheduling ping and triggering time tic
     GuardConditions_ListeningConToSendingConAllowed_fake.return_val = true;
     int64_t testTime = 1;
-    HALClock clock = HALClock_Create(&testTime);
+    ProtocolClock clock = ProtocolClock_Create(&testTime);
     Node_SetClock(node, clock);
     Node_SetScheduler(node, scheduler);
     Scheduler_SchedulePingAtTime(node, 1);

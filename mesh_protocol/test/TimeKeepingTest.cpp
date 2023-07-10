@@ -95,7 +95,7 @@ TEST_F(TimeKeepingTestGeneral, calculateCurrentSlotNumIsOneWhenNoFrameStart) {
 
 TEST_F(TimeKeepingTestGeneral, calculateCurrentSlotNumGeneral) {
   int64_t time = 99;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 0;
@@ -110,7 +110,7 @@ TEST_F(TimeKeepingTestGeneral, calculateCurrentFrameNumIsZeroWhenNoFrameStart) {
 
 TEST_F(TimeKeepingTestGeneral, calculateCurrentFrameNumFirstFrame) {
   int64_t time = 399;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 0;
@@ -121,7 +121,7 @@ TEST_F(TimeKeepingTestGeneral, calculateCurrentFrameNumFirstFrame) {
 
 TEST_F(TimeKeepingTestGeneral, calculateCurrentFrameNumSecondFrame) {
   int64_t time = 500;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 100;
@@ -132,7 +132,7 @@ TEST_F(TimeKeepingTestGeneral, calculateCurrentFrameNumSecondFrame) {
 
 TEST_F(TimeKeepingTestGeneral, calculateNextStartOfSlotForSlotInThisFrame) {
   int64_t time = 500;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 100;
@@ -146,7 +146,7 @@ TEST_F(TimeKeepingTestGeneral, calculateNextStartOfSlotForSlotInThisFrame) {
 
 TEST_F(TimeKeepingTestGeneral, calculateNextStartOfSlotForSlotInNextFrame) {
   int64_t time = 700;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 100;
@@ -160,7 +160,7 @@ TEST_F(TimeKeepingTestGeneral, calculateNextStartOfSlotForSlotInNextFrame) {
 
 TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverNotResetTrue) {
   int64_t time = 1000;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   bool waitTimeIsOver = TimeKeeping_InitialWaitTimeOver(node);
@@ -170,7 +170,7 @@ TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverNotResetTrue) {
 
 TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverNotResetTrue2) {
   int64_t time = 2000;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   bool waitTimeIsOver = TimeKeeping_InitialWaitTimeOver(node);
@@ -180,7 +180,7 @@ TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverNotResetTrue2) {
 
 TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverNotResetFalse) {
   int64_t time = 999;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   bool waitTimeIsOver = TimeKeeping_InitialWaitTimeOver(node);
@@ -190,7 +190,7 @@ TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverNotResetFalse) {
 
 TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverResetFalse) {
   int64_t time = 200;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
   
   TimeKeeping_ResetTime(node);
@@ -204,7 +204,7 @@ TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverResetFalse) {
 
 TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverResetTrue) {
   int64_t time = 200;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
   
   TimeKeeping_ResetTime(node);
@@ -218,7 +218,7 @@ TEST_F(TimeKeepingTestGeneral, initialWaitTimeOverResetTrue) {
 
 TEST_F(TimeKeepingTestGeneral, calculateNetworkAgeForPreamble) {
   int64_t time = 200;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   Message msg = Message_Create(PING);
@@ -233,7 +233,7 @@ TEST_F(TimeKeepingTestGeneral, calculateNetworkAgeForPreamble) {
 
 TEST_F(TimeKeepingTestGeneral, getTimeRemainingInCurrentSlotMidSlot) {
   int64_t time = 77;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 0;
@@ -246,7 +246,7 @@ TEST_F(TimeKeepingTestGeneral, getTimeRemainingInCurrentSlotMidSlot) {
 
 TEST_F(TimeKeepingTestGeneral, getTimeRemainingInCurrentSlotBeginningOfSlot) {
   int64_t time = 200;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 0;
@@ -259,7 +259,7 @@ TEST_F(TimeKeepingTestGeneral, getTimeRemainingInCurrentSlotBeginningOfSlot) {
 
 TEST_F(TimeKeepingTestGeneral, getTimeRemainingInCurrentSlotEndOfSlot) {
   int64_t time = 349;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 250;
@@ -272,7 +272,7 @@ TEST_F(TimeKeepingTestGeneral, getTimeRemainingInCurrentSlotEndOfSlot) {
 
 TEST_F(TimeKeepingTestGeneral, calculateTimeSinceFrameStartFirstFrame) {
   int64_t time = 349;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 200;
@@ -285,7 +285,7 @@ TEST_F(TimeKeepingTestGeneral, calculateTimeSinceFrameStartFirstFrame) {
 
 TEST_F(TimeKeepingTestGeneral, calculateTimeSinceFrameStartSecondFrame) {
   int64_t time = 670;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 200;
@@ -298,7 +298,7 @@ TEST_F(TimeKeepingTestGeneral, calculateTimeSinceFrameStartSecondFrame) {
 
 TEST_F(TimeKeepingTestGeneral, calculateTimeSinceFrameStartSecondFrameAtStart) {
   int64_t time = 600;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   int64_t frameStartTime = 200;

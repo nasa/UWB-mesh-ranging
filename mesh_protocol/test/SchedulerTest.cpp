@@ -3,7 +3,7 @@
 extern "C" {
 #include "../include/Scheduler.h"
 #include "../include/Node.h"
-#include "../include/HALClock.h"
+#include "../include/ProtocolClock.h"
 #include "../include/StateMachine.h"
 #include "../include/SlotMap.h"
 #include "../include/Message.h"
@@ -12,7 +12,7 @@ extern "C" {
 }
 
 DEFINE_FFF_GLOBALS;
-FAKE_VALUE_FUNC(uint64_t, RandomNumbers_GetRandomIntBetween, Node, uint64_t, uint64_t);
+FAKE_VALUE_FUNC(int64_t, RandomNumbers_GetRandomIntBetween, Node, int64_t, int64_t);
 FAKE_VALUE_FUNC(bool, SlotMap_SlotReservationGoalMet, Node);
 FAKE_VALUE_FUNC(int8_t, SlotMap_GetReservableSlot, Node);
 FAKE_VALUE_FUNC(int8_t, SlotMap_CalculateNextOwnOrPendingSlotNum, Node, int8_t);
@@ -25,13 +25,13 @@ FAKE_VALUE_FUNC(bool, SlotMap_IsOwnSlot, Node, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_IsPendingSlot, Node, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_ReleasePendingSlot, Node, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_ReleaseOwnSlot, Node, int8_t);
-FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapStatus, Node, SlotOccupancy*, int8_t);
+FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapStatus, Node, int*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapIds, Node, int8_t*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetOneHopSlotMapLastUpdated, Node, int64_t*, int8_t);
-FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapStatus, Node, SlotOccupancy*, int8_t);
+FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapStatus, Node, int*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapIds, Node, int8_t*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetTwoHopSlotMapLastUpdated, Node, int64_t*, int8_t);
-FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapStatus, Node, SlotOccupancy*, int8_t);
+FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapStatus, Node, int*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapIds, Node, int8_t*, int8_t);
 FAKE_VALUE_FUNC(bool, SlotMap_GetThreeHopSlotMapLastUpdated, Node, int64_t*, int8_t);
 FAKE_VALUE_FUNC(int8_t, SlotMap_GetCollisionTimes, Node, int64_t*, int8_t);
@@ -75,7 +75,7 @@ class SchedulerTestGeneral : public ::testing::Test {
     
     int64_t *time = (int64_t *)malloc(1);
     *time = 5;
-    HALClock clock = HALClock_Create(time);
+    ProtocolClock clock = ProtocolClock_Create(time);
 
     Node_SetScheduler(node, scheduler);
     Node_SetClock(node, clock);

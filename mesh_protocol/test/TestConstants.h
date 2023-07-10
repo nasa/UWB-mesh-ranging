@@ -36,26 +36,40 @@
  * - OSI Approved License: https://opensource.org/licenses/Apache-2.0
  */
 
-#include "../include/Config.h"
 
-Config Config_Create() {
-  Config self = calloc(1, sizeof(ConfigStruct));
+// THIS IS AN IMPLEMENTATION OF CONSTANTS SOLELY FOR UNIT TESTS
 
-  self->frameLength = 400;
-  self->slotLength = 100;
-  self->slotGoal = 1;
-  self->initialPingUpperLimit = 1000;
-  self->initialWaitTime = 1000;
-  self->guardPeriodLength = 5;
-  self->networkAgeToleranceSameNetwork = 2;
-  self->rangingTimeOut = 50; // poll length + response length + final length + result length + 3*waittime
-  self->slotExpirationTimeOut = 400; // 1 frame
-  self->ownSlotExpirationTimeOut = 800; // 2 frames
-  self->absentNeighborTimeOut = 600; // 1.5 frames  
-  self->occupiedTimeout = 800;
-  self->occupiedToFreeTimeoutMultiHop = 500;
-  self->collidingTimeoutMultiHop = 400;
-  self->collidingTimeout = 100;
+/** @file Constants.h
+*   @brief Defines some constants that cannot got into config because their value is needed at compile time
+*/  
 
-  return self;
-};
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
+/** Write output to the console in simulation */
+// uncomment if used with MATLAB simulation
+//#define SIMULATION 1
+#define DEBUG 0
+#define DEBUG_VERBOSE 0
+
+/** Number of slots per frame */
+#define NUM_SLOTS 4
+
+/** Maximum number of pending slots per node */
+#define MAX_NUM_PENDING_SLOTS 5
+
+/** Maximum number of own slots per node */
+#define MAX_NUM_OWN_SLOTS 5
+
+/** Maximum number of nodes */
+#define MAX_NUM_NODES 6
+
+/** Maximum number of collisions that are recorded for the current frame
+* If more collisions occur, the oldest will be overwritten
+*/
+#define MAX_NUM_COLLISIONS_RECORDED 8
+
+// 32767 is what LCG assumes as RAND_MAX, but MATLAB seems to use 2^32-1 as RAND_MAX; so the number had to be hardcoded here to work in simulation
+#define RAND_MAX_LCG 32767
+
+#endif

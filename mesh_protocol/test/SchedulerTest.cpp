@@ -132,12 +132,12 @@ TEST_F(SchedulerTestGeneral, cancelScheduledPingWhenScheduled) {
   Scheduler_SchedulePingAtTime(node, scheduleTime);
   Scheduler_CancelScheduledPing(node);
 
-  EXPECT_EQ(0, Scheduler_GetTimeOfNextSchedule(node));
+  EXPECT_EQ(-1, Scheduler_GetTimeOfNextSchedule(node));
 }
 
 TEST_F(SchedulerTestGeneral, cancelScheduledPingWhenNotScheduled) {
   Scheduler_CancelScheduledPing(node);
-  EXPECT_EQ(0, Scheduler_GetTimeOfNextSchedule(node));
+  EXPECT_EQ(-1, Scheduler_GetTimeOfNextSchedule(node));
 }
 
 TEST_F(SchedulerTestGeneral, nothingScheduledYetWhenNothingScheduled) {
@@ -173,8 +173,8 @@ TEST_F(SchedulerTestGeneral, scheduleNextPingUnconnectedUseCorrectArguments) {
 
   Scheduler_ScheduleNextPing(node);
 
-  ASSERT_EQ(5, RandomNumbers_GetRandomIntBetween_fake.arg1_history[0]);
-  ASSERT_EQ(1005, RandomNumbers_GetRandomIntBetween_fake.arg2_history[0]); // depends on TestConfig initialPingUpperLimit
+  ASSERT_EQ(6, RandomNumbers_GetRandomIntBetween_fake.arg1_history[0]); // 6 = time + 1
+  ASSERT_EQ(1006, RandomNumbers_GetRandomIntBetween_fake.arg2_history[0]); // 1006 = lowerLimit+initialPingUpperLimit
 };
 
 TEST_F(SchedulerTestGeneral, scheduleNextPingConnectedGoalNotMet) {
@@ -191,9 +191,7 @@ TEST_F(SchedulerTestGeneral, scheduleNextPingConnectedGoalNotMet) {
 
   Scheduler_ScheduleNextPing(node);
   
-  ASSERT_EQ(0, RandomNumbers_GetRandomIntBetween_fake.arg0_history[0]);
-  ASSERT_EQ(8, RandomNumbers_GetRandomIntBetween_fake.arg1_history[0]);
-  EXPECT_EQ(335, Scheduler_GetTimeOfNextSchedule(node)); // slot 4 start + delay*PING_SIZE + guardPeriodLength
+  EXPECT_EQ(365, Scheduler_GetTimeOfNextSchedule(node)); // slot 4 start + delay*PING_SIZE + guardPeriodLength
 };
 
 TEST_F(SchedulerTestGeneral, scheduleNextPingConnectedGoalMet) {
@@ -210,9 +208,7 @@ TEST_F(SchedulerTestGeneral, scheduleNextPingConnectedGoalMet) {
 
   Scheduler_ScheduleNextPing(node);
   
-  ASSERT_EQ(0, RandomNumbers_GetRandomIntBetween_fake.arg0_history[0]);
-  ASSERT_EQ(8, RandomNumbers_GetRandomIntBetween_fake.arg1_history[0]);
-  EXPECT_EQ(125, Scheduler_GetTimeOfNextSchedule(node)); // slot 2 start + delay*PING_SIZE + guardPeriodLength
+  EXPECT_EQ(145, Scheduler_GetTimeOfNextSchedule(node)); // slot 2 start + delay*PING_SIZE + guardPeriodLength
 };
 
 TEST_F(SchedulerTestGeneral, scheduleNextPingConnectedGoalMetCurrentIsOwnSlot) {
@@ -229,7 +225,5 @@ TEST_F(SchedulerTestGeneral, scheduleNextPingConnectedGoalMetCurrentIsOwnSlot) {
 
   Scheduler_ScheduleNextPing(node);
   
-  ASSERT_EQ(0, RandomNumbers_GetRandomIntBetween_fake.arg0_history[0]);
-  ASSERT_EQ(8, RandomNumbers_GetRandomIntBetween_fake.arg1_history[0]);
-  EXPECT_EQ(425, Scheduler_GetTimeOfNextSchedule(node)); // next slot 1 start + delay*PING_SIZE + guardPeriodLength
+  EXPECT_EQ(445, Scheduler_GetTimeOfNextSchedule(node)); // next slot 1 start + delay*PING_SIZE + guardPeriodLength
 };

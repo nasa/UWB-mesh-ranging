@@ -42,6 +42,8 @@ project(mesh_net_protocol)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_C_STANDARD 11)
 
+add_compile_definitions("TESTING")
+
 # include GoogleTest by downloading it from GitHub
 include(FetchContent)
 FetchContent_Declare(

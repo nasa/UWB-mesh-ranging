@@ -41,6 +41,12 @@
 *   @brief Defines some constants that cannot got into config because their value is needed at compile time
 */  
 
+#ifdef TESTING
+#include "../test/TestConstants.h"
+#endif
+
+#ifndef TESTING
+
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
@@ -70,4 +76,5 @@
 // 32767 is what LCG assumes as RAND_MAX, but MATLAB seems to use 2^32-1 as RAND_MAX; so the number had to be hardcoded here to work in simulation
 #define RAND_MAX_LCG 32767
 
+#endif
 #endif

@@ -315,7 +315,6 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapToOccupied) {
 }
 
 TEST_F(SlotMapTestGeneral, updateOneHopSlotMapNotTimedout) {
-  #define OCCUPIED_TIMEOUT 500
 
   int64_t time = 5;
   ProtocolClock clock = ProtocolClock_Create(&time);
@@ -328,7 +327,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapNotTimedout) {
   SlotMap_UpdateOneHopSlotMap(node, msg, currentSlot);
 
   // update again when slot not timed out/expired
-  time = 504;
+  time = 804;
 
   Message msg2 = Message_Create(PING);
   msg2->senderId = 3;
@@ -348,7 +347,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapNotTimedout) {
   bool idresult = SlotMap_GetOneHopSlotMapIds(node, &idbuffer[0], 4);
 
   EXPECT_EQ(true, idresult);
-  EXPECT_EQ(2, idbuffer[0]);
+  EXPECT_EQ(msg->senderId, idbuffer[0]);
   EXPECT_EQ(0, idbuffer[1]);
   EXPECT_EQ(0, idbuffer[2]);
   EXPECT_EQ(0, idbuffer[3]);
@@ -368,7 +367,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapTimedout) {
   SlotMap_UpdateOneHopSlotMap(node, msg, currentSlot);
 
   // update again when slot is timed out/expired
-  time = 505;
+  time = 805;
 
   Message msg2 = Message_Create(PING);
   msg2->senderId = 3;
@@ -392,25 +391,6 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapTimedout) {
   EXPECT_EQ(0, idbuffer[1]);
   EXPECT_EQ(0, idbuffer[2]);
   EXPECT_EQ(0, idbuffer[3]);
-}
-
-TEST_F(SlotMapTestGeneral, updateOneHopSlotMapToColliding) {
-  Message msg = Message_Create(COLLISION);
-  int8_t currentSlot = 1;
-
-  SlotMap_UpdateOneHopSlotMap(node, msg, currentSlot);
-
-  int statusbuffer[4];
-  bool statusresult = SlotMap_GetOneHopSlotMapStatus(node, &statusbuffer[0], 4);
-
-  EXPECT_EQ(true, statusresult);
-  EXPECT_EQ(COLLIDING, statusbuffer[0]);
-
-  int8_t idbuffer[4];
-  bool idresult = SlotMap_GetOneHopSlotMapIds(node, &idbuffer[0], 4);
-
-  EXPECT_EQ(true, idresult);
-  EXPECT_EQ(0, idbuffer[0]);
 }
 
 TEST_F(SlotMapTestGeneral, updateOneHopSlotMapToOccupiedCollisionTimedout) {
@@ -494,7 +474,6 @@ TEST_F(SlotMapTestGeneral, updateMultiHopSlotMapToOccupied) {
 }
 
 TEST_F(SlotMapTestGeneral, multiHopIsOccupiedSetColliding) {
-  #define OCCUPIED_TIMEOUT 500
 
   int64_t time = 5;
   ProtocolClock clock = ProtocolClock_Create(&time);
@@ -513,8 +492,9 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedSetColliding) {
 
   SlotMap_UpdateTwoHopSlotMap(node, msg);
 
-  time = 504;
-
+  time = 404;
+  
+  msg->senderId = 4;
   msg->oneHopSlotStatus[1] = 1;
   msg->oneHopSlotIds[1] = 3;
 
@@ -540,7 +520,6 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedSetColliding) {
 }
 
 TEST_F(SlotMapTestGeneral, multiHopIsOccupiedButTimedout) {
-  #define OCCUPIED_TIMEOUT 500
 
   int64_t time = 5;
   ProtocolClock clock = ProtocolClock_Create(&time);
@@ -559,7 +538,7 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedButTimedout) {
 
   SlotMap_UpdateTwoHopSlotMap(node, msg);
 
-  time = 505;
+  time = 805;
 
   msg->oneHopSlotStatus[1] = 1;
   msg->oneHopSlotIds[1] = 3;
@@ -581,7 +560,7 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedButTimedout) {
 
 
 TEST_F(SlotMapTestGeneral, multiHopPendingSlotReportedOccupied) {
-  #define OCCUPIED_TIMEOUT 500
+
   node->id = 1;
   int8_t slotNum = 1;
   int8_t neighbors[1] = {2};

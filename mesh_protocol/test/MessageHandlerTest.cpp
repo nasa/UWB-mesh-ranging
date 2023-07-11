@@ -51,6 +51,7 @@ extern "C" {
 #include "../test/fff.h"
 }
 
+
 DEFINE_FFF_GLOBALS;
 FAKE_VALUE_FUNC(int64_t, RandomNumbers_GetRandomIntBetween, Node, int64_t, int64_t);
 FAKE_VALUE_FUNC(int16_t, RandomNumbers_GetRandomElementFrom, Node, int16_t*, int16_t);
@@ -127,10 +128,10 @@ TEST_F(MessageHandlerTestGeneral, handlePingUnconnected) {
   EXPECT_EQ(CONNECTED, NetworkManager_GetNetworkStatus(node));
   EXPECT_EQ(msg->networkId, NetworkManager_GetNetworkId(node));
   
-  int twoHopStatusbuffer[4];
+  int twoHopStatusbuffer[4] = {0,0,0,0};
   SlotMap_GetTwoHopSlotMapStatus(node, &twoHopStatusbuffer[0], 4);
 
-  int threeHopStatusbuffer[4];
+  int threeHopStatusbuffer[4] = {0,0,0,0};
   SlotMap_GetThreeHopSlotMapStatus(node, &threeHopStatusbuffer[0], 4);
 
   EXPECT_EQ(0, twoHopStatusbuffer[0]);

@@ -53,7 +53,6 @@ Config Config_Create() {
   self->slotExpirationTimeOut = 400; // 1 frame
   self->ownSlotExpirationTimeOut = 800; // 2 frames
   self->absentNeighborTimeOut = 600; // 1.5 frames  
-  self->autoDutyCycle = 0;
 
   return self;
 };

@@ -17,7 +17,7 @@ class SlotMapTestGeneral : public ::testing::Test {
 
     int64_t *time = (int64_t *)malloc(1);
     *time = 5;
-    clock = HALClock_Create(time);
+    clock = ProtocolClock_Create(time);
 
     Node_SetSlotMap(node, slotMap);
     Node_SetClock(node, clock);
@@ -28,7 +28,7 @@ class SlotMapTestGeneral : public ::testing::Test {
   // void TearDown() override {}
   Node node;
   SlotMap slotMap;
-  HALClock clock;
+  ProtocolClock clock;
   TimeKeeping timeKeeping;
   Config config;
 };
@@ -295,7 +295,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapToOccupied) {
 
   SlotMap_UpdateOneHopSlotMap(node, msg, currentSlot);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool statusresult = SlotMap_GetOneHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, statusresult);
@@ -318,7 +318,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapNotTimedout) {
   #define OCCUPIED_TIMEOUT 500
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   Message msg = Message_Create(PING);
@@ -335,7 +335,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapNotTimedout) {
 
   SlotMap_UpdateOneHopSlotMap(node, msg2, currentSlot);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool result = SlotMap_GetOneHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, result);
@@ -358,7 +358,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapTimedout) {
   #define OCCUPIED_TIMEOUT 500
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   Message msg = Message_Create(PING);
@@ -375,7 +375,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapTimedout) {
 
   SlotMap_UpdateOneHopSlotMap(node, msg2, currentSlot);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool result = SlotMap_GetOneHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, result);
@@ -400,7 +400,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapToColliding) {
 
   SlotMap_UpdateOneHopSlotMap(node, msg, currentSlot);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool statusresult = SlotMap_GetOneHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, statusresult);
@@ -417,7 +417,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapToOccupiedCollisionTimedout) {
   #define COLLIDING_TIMEOUT 100
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   Message msg = Message_Create(COLLISION);
@@ -433,7 +433,7 @@ TEST_F(SlotMapTestGeneral, updateOneHopSlotMapToOccupiedCollisionTimedout) {
 
   SlotMap_UpdateOneHopSlotMap(node, msg2, currentSlot);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool result = SlotMap_GetOneHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, result);
@@ -474,7 +474,7 @@ TEST_F(SlotMapTestGeneral, updateMultiHopSlotMapToOccupied) {
 
   SlotMap_UpdateTwoHopSlotMap(node, msg);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool statusresult = SlotMap_GetTwoHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, statusresult);
@@ -497,7 +497,7 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedSetColliding) {
   #define OCCUPIED_TIMEOUT 500
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   Message msg = Message_Create(PING);
@@ -520,7 +520,7 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedSetColliding) {
 
   SlotMap_UpdateTwoHopSlotMap(node, msg);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool statusresult = SlotMap_GetTwoHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, statusresult);
@@ -543,7 +543,7 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedButTimedout) {
   #define OCCUPIED_TIMEOUT 500
 
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   Message msg = Message_Create(PING);
@@ -566,7 +566,7 @@ TEST_F(SlotMapTestGeneral, multiHopIsOccupiedButTimedout) {
 
   SlotMap_UpdateTwoHopSlotMap(node, msg);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool statusresult = SlotMap_GetTwoHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, statusresult);
@@ -601,7 +601,7 @@ TEST_F(SlotMapTestGeneral, multiHopPendingSlotReportedOccupied) {
               
   SlotMap_UpdateTwoHopSlotMap(node, msg);
 
-  SlotOccupancy statusbuffer[4];
+  int statusbuffer[4];
   bool statusresult = SlotMap_GetTwoHopSlotMapStatus(node, &statusbuffer[0], 4);
 
   EXPECT_EQ(true, statusresult);
@@ -748,7 +748,7 @@ TEST_F(SlotMapTestGeneral, releaseOwnSlot) {
 TEST_F(SlotMapTestGeneral, clearToSendSlotFree) {
   node->id = 1;
   int64_t time = 5;
-  HALClock clock = HALClock_Create(&time);
+  ProtocolClock clock = ProtocolClock_Create(&time);
   Node_SetClock(node, clock);
 
   TimeKeeping_SetFrameStartTime(node, time);
